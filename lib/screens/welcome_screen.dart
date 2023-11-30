@@ -44,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -85,14 +85,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             ),
             kReusableButton(
               ButtonText: "Log In",
-              ButtonColor: Colors.lightBlue,
+              ButtonColor: kColor2,
               onPressed: () {
                 Navigator.pushNamed(context, LoginScreen.id);
               },
             ),
             kReusableButton(
               ButtonText: "Register",
-              ButtonColor: Colors.blue,
+              ButtonColor: kColor1,
               onPressed: () {
                 Navigator.pushNamed(context, RegistrationScreen.id);
               },

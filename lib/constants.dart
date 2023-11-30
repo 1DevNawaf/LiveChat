@@ -19,4 +19,10 @@ const kMessageContainerDecoration = BoxDecoration(
 );
 
 const kWelcomeScreenTextStyle =
-    TextStyle(fontSize: 45.0, fontWeight: FontWeight.w900, color: Colors.black);
+    TextStyle(fontSize: 45.0, fontWeight: FontWeight.w900, color: kColor1);
+
+const kBackgroundColor = Color(0xffFFF8DE);
+
+const kColor1 = Color(0xff243B3B);
+
+const kColor2 = Color(0xffE1C97D);
