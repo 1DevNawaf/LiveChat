@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class kReusableButton extends StatelessWidget {
-  kReusableButton({
+class ReusableButton extends StatelessWidget {
+  ReusableButton({
     required this.onPressed,
     required this.ButtonText,
     required this.ButtonColor,
