@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:live_chat/common/ReusableButton.dart';
+import 'package:live_chat/common/ReusableTextField.dart';
 import 'package:live_chat/constants.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -22,80 +24,50 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             Hero(
               tag: "logo",
               child: Container(
-                height: 200.0,
+                height: 125.0,
                 child: Image.asset('images/logo.png'),
               ),
             ),
             SizedBox(
               height: 48.0,
             ),
-            TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter your email',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: kColor1, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: kColor1, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
-            ),
+
+            //email field
+            ReusableTextField(
+                Text: "Enter Your E-mail",
+                TextColor: Colors.black.withOpacity(0.5),
+                BorderColor: kColor1,
+                FoucusColor: kColor1),
             SizedBox(
               height: 8.0,
             ),
-            TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter your password',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: kColor1, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: kColor1, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
+
+            //reenter email field
+            ReusableTextField(
+                Text: "Re-enter Your E-mail",
+                TextColor: Colors.black.withOpacity(0.5),
+                BorderColor: kColor1,
+                FoucusColor: kColor1),
+            SizedBox(
+              height: 8.0,
             ),
+
+            //password field
+            ReusableTextField(
+                Text: "Enter Your Password",
+                TextColor: Colors.black.withOpacity(0.5),
+                BorderColor: kColor1,
+                FoucusColor: kColor1),
             SizedBox(
               height: 24.0,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: kColor1,
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    //Implement registration functionality.
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Register',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
+
+            //register button
+            ReusableButton(
+              onPressed: () {},
+              ButtonText: "Register",
+              ButtonColor: kColor1,
+            )
           ],
         ),
       ),
