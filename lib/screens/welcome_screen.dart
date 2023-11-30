@@ -1,4 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:live_chat/constants.dart';
 import 'package:live_chat/screens/login_screen.dart';
 import 'package:live_chat/screens/registration_screen.dart';
 
@@ -13,7 +15,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
   //Animation property and values
   late AnimationController controller;
-
   //animation style
   late Animation animation;
 
@@ -25,21 +26,17 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       vsync: this,
       duration: Duration(milliseconds: 1500),
     );
-
     controller.forward();
-
-    animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
-
     controller.addListener(() {
       setState(() {});
-      print(animation.value);
     });
+
+    animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
   }
 
   @override
   void dispose() {
     super.dispose();
-
     controller.dispose();
   }
 
@@ -60,16 +57,25 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   tag: "logo",
                   child: Container(
                     child: Image.asset('images/logo.png'),
-                    height: animation.value * 100,
+                    height: 150,
                   ),
                 ),
-                Text(
-                  'Flash Chat',
-                  style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
-                  ),
+                AnimatedTextKit(
+                  animatedTexts: [
+                    RotateAnimatedText(
+                      "Live",
+                      textStyle: kWelcomeScreenTextStyle,
+                      duration: Duration(milliseconds: 1250),
+                    ),
+                    RotateAnimatedText("Chat",
+                        textStyle: kWelcomeScreenTextStyle,
+                        duration: Duration(milliseconds: 1250)),
+                    TypewriterAnimatedText(
+                      "Live\nChat",
+                      speed: Duration(milliseconds: 150),
+                      textStyle: kWelcomeScreenTextStyle,
+                    ),
+                  ],
                 ),
               ],
             ),
