@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:live_chat/common/ReusableButton.dart';
 import 'package:live_chat/constants.dart';
 
-import '../common/ReusableTextField.dart';
+import '../common/ReusableEmailTextField.dart';
+import '../common/ReusablePasswordTextField.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";
@@ -12,6 +13,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late String Email;
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,20 +36,26 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 48.0,
             ),
-            ReusableTextField(
+            ReusableEmailTextField(
               Text: "E-mail",
               TextColor: Colors.black.withOpacity(0.5),
               BorderColor: kColor2,
               FoucusColor: kColor2,
+              onChanged: (value) {
+                Email = value;
+              },
             ),
             SizedBox(
               height: 8.0,
             ),
-            ReusableTextField(
+            ReusablePasswordTextField(
               Text: "Password",
               TextColor: Colors.black.withOpacity(0.5),
               BorderColor: kColor2,
               FoucusColor: kColor2,
+              onChanged: (value) {
+                password = value;
+              },
             ),
             SizedBox(
               height: 24.0,
@@ -53,7 +63,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
             //Log in Button
             ReusableButton(
-                onPressed: () {}, ButtonText: "Log in", ButtonColor: kColor2)
+                onPressed: () {
+                  print(Email);
+                  print(password);
+                },
+                ButtonText: "Log in",
+                ButtonColor: kColor2)
           ],
         ),
       ),

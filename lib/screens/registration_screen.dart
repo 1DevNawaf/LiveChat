@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:live_chat/common/ReusableButton.dart';
-import 'package:live_chat/common/ReusableTextField.dart';
+import 'package:live_chat/common/ReusableEmailTextField.dart';
 import 'package:live_chat/constants.dart';
+
+import '../common/ReusablePasswordTextField.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = "registration_screen";
@@ -11,6 +13,9 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  late String Email;
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,38 +38,41 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ),
 
             //email field
-            ReusableTextField(
-                Text: "Enter Your E-mail",
-                TextColor: Colors.black.withOpacity(0.5),
-                BorderColor: kColor1,
-                FoucusColor: kColor1),
+            ReusableEmailTextField(
+              Text: "Enter Your E-mail",
+              TextColor: Colors.black.withOpacity(0.5),
+              BorderColor: kColor1,
+              FoucusColor: kColor1,
+              onChanged: (value) {
+                Email = value;
+              },
+            ),
             SizedBox(
               height: 8.0,
             ),
-
-            //reenter email field
-            ReusableTextField(
-                Text: "Re-enter Your E-mail",
-                TextColor: Colors.black.withOpacity(0.5),
-                BorderColor: kColor1,
-                FoucusColor: kColor1),
             SizedBox(
               height: 8.0,
             ),
-
             //password field
-            ReusableTextField(
-                Text: "Enter Your Password",
-                TextColor: Colors.black.withOpacity(0.5),
-                BorderColor: kColor1,
-                FoucusColor: kColor1),
+            ReusablePasswordTextField(
+              Text: "Enter Your Password",
+              TextColor: Colors.black.withOpacity(0.5),
+              BorderColor: kColor1,
+              FoucusColor: kColor1,
+              onChanged: (value) {
+                password = value;
+              },
+            ),
             SizedBox(
               height: 24.0,
             ),
 
             //register button
             ReusableButton(
-              onPressed: () {},
+              onPressed: () {
+                print(Email);
+                print(password);
+              },
               ButtonText: "Register",
               ButtonColor: kColor1,
             )
