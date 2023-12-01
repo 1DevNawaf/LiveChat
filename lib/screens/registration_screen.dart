@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:live_chat/common/ReusableButton.dart';
 import 'package:live_chat/common/ReusableEmailTextField.dart';
 import 'package:live_chat/constants.dart';
 
 import '../common/ReusablePasswordTextField.dart';
+import 'chat_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = "registration_screen";
@@ -13,7 +15,11 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  late String Email;
+  //firebase authentication variable
+  final _auth = FirebaseAuth.instance;
+
+  late String email;
+  late String reEmail;
   late String password;
 
   @override
@@ -44,11 +50,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               BorderColor: kColor1,
               FoucusColor: kColor1,
               onChanged: (value) {
-                Email = value;
+                email = value;
               },
             ),
+
             SizedBox(
               height: 8.0,
+            ),
+
+            //Re-enter email field
+            ReusableEmailTextField(
+              Text: "Re-enter Your E-mail",
+              TextColor: Colors.black.withOpacity(0.5),
+              BorderColor: kColor1,
+              FoucusColor: kColor1,
+              onChanged: (value) {
+                reEmail = value;
+              },
             ),
             SizedBox(
               height: 8.0,
@@ -69,9 +87,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
             //register button
             ReusableButton(
-              onPressed: () {
-                print(Email);
+              onPressed: () async {
+                print(email);
                 print(password);
+
+                //creating a user
+                final newUser = await _auth.createUserWithEmailAndPassword(
+                    email: email, password: password);
+
+                if (newUser != null && reEmail == email) {
+                  Navigator.pushNamed(context, ChatScreen.id);
+                }
               },
               ButtonText: "Register",
               ButtonColor: kColor1,

@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:live_chat/common/ReusableButton.dart';
 import 'package:live_chat/constants.dart';
 
 import '../common/ReusableEmailTextField.dart';
 import '../common/ReusablePasswordTextField.dart';
+import 'chat_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";
@@ -13,7 +15,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late String Email;
+  final _auth = FirebaseAuth.instance;
+
+  late String email;
   late String password;
 
   @override
@@ -42,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               BorderColor: kColor2,
               FoucusColor: kColor2,
               onChanged: (value) {
-                Email = value;
+                email = value;
               },
             ),
             SizedBox(
@@ -63,9 +67,22 @@ class _LoginScreenState extends State<LoginScreen> {
 
             //Log in Button
             ReusableButton(
-                onPressed: () {
-                  print(Email);
+                onPressed: () async {
+                  print(email);
                   print(password);
+
+                  try {
+                    //sign in with email and password
+                    final testUser = await _auth.signInWithEmailAndPassword(
+                        email: email, password: password);
+
+                    //check if the credentials are correct
+                    if (testUser != null) {
+                      Navigator.pushNamed(context, ChatScreen.id);
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
                 },
                 ButtonText: "Log in",
                 ButtonColor: kColor2)
