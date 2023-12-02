@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:live_chat/common/ReusableButton.dart';
 import 'package:live_chat/constants.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../common/ReusableEmailTextField.dart';
 import '../common/ReusablePasswordTextField.dart';
@@ -19,74 +20,84 @@ class _LoginScreenState extends State<LoginScreen> {
 
   late String email;
   late String password;
+  bool spinner = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Hero(
-              tag: "logo",
-              child: Container(
-                height: 200.0,
-                child: Image.asset('images/logo.png'),
+      body: ModalProgressHUD(
+        inAsyncCall: spinner,
+        color: kColor1,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Hero(
+                tag: "logo",
+                child: Container(
+                  height: 200.0,
+                  child: Image.asset('images/logo.png'),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 48.0,
-            ),
-            ReusableEmailTextField(
-              Text: "E-mail",
-              TextColor: Colors.black.withOpacity(0.5),
-              BorderColor: kColor2,
-              FoucusColor: kColor2,
-              onChanged: (value) {
-                email = value;
-              },
-            ),
-            SizedBox(
-              height: 8.0,
-            ),
-            ReusablePasswordTextField(
-              Text: "Password",
-              TextColor: Colors.black.withOpacity(0.5),
-              BorderColor: kColor2,
-              FoucusColor: kColor2,
-              onChanged: (value) {
-                password = value;
-              },
-            ),
-            SizedBox(
-              height: 24.0,
-            ),
-
-            //Log in Button
-            ReusableButton(
-                onPressed: () async {
-                  print(email);
-                  print(password);
-
-                  try {
-                    //sign in with email and password
-                    final testUser = await _auth.signInWithEmailAndPassword(
-                        email: email, password: password);
-
-                    //check if the credentials are correct
-                    if (testUser != null) {
-                      Navigator.pushNamed(context, ChatScreen.id);
-                    }
-                  } catch (e) {
-                    print(e);
-                  }
+              SizedBox(
+                height: 48.0,
+              ),
+              ReusableEmailTextField(
+                Text: "E-mail",
+                TextColor: Colors.black.withOpacity(0.5),
+                BorderColor: kColor2,
+                FoucusColor: kColor2,
+                onChanged: (value) {
+                  email = value;
                 },
-                ButtonText: "Log in",
-                ButtonColor: kColor2)
-          ],
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              ReusablePasswordTextField(
+                Text: "Password",
+                TextColor: Colors.black.withOpacity(0.5),
+                BorderColor: kColor2,
+                FoucusColor: kColor2,
+                onChanged: (value) {
+                  password = value;
+                },
+              ),
+              SizedBox(
+                height: 24.0,
+              ),
+
+              //Log in Button
+              ReusableButton(
+                  onPressed: () async {
+                    setState(() {
+                      spinner = true;
+                    });
+
+                    try {
+                      //sign in with email and password
+                      final testUser = await _auth.signInWithEmailAndPassword(
+                          email: email, password: password);
+
+                      //check if the credentials are correct
+                      if (testUser != null) {
+                        Navigator.pushNamed(context, ChatScreen.id);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+
+                    setState(() {
+                      spinner = false;
+                    });
+                  },
+                  ButtonText: "Log in",
+                  ButtonColor: kColor2)
+            ],
+          ),
         ),
       ),
     );
