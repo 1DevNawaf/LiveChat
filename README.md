@@ -1,9 +1,10 @@
+![LiveChat App Icon](https://drive.google.com/uc?export=view&id=1Z9lNZkn1PrWeRoeRqFHk94Gsj9XieVqG)
 # LiveChat - Modern Messaging App
 
 LiveChat is a modern messaging app built using Flutter that allows users to sign up and log in to chat. The primary focus of this project is to demonstrate how to incorporate Firebase into Flutter applications. We'll be leveraging Firebase Cloud Firestore for a cloud-based NoSQL database and the Firebase authentication package to implement secure authentication methods.
 
 ## Demo
-![App Demo](https://drive.google.com/uc?id=1zArqpKAcM7AeFCqbX8tjowkfcTmOsATc)
+![App Demo](https://drive.google.com/uc?id=1nUOiejAJKUvr2dJy-dPhbPeXSZRVA3hc)
 
 ## Features
 
@@ -30,6 +31,12 @@ This project serves as a practical guide to incorporating Firebase into Flutter 
 ![Screenshot 2](https://drive.google.com/uc?export=view&id=18Xt3GvQlTnS9zeeW-OwE7t78VCwozVJO)
 
 
+![Screenshot 2](https://drive.google.com/uc?export=view&id=18Xt3GvQlTnS9zeeW-OwE7t78VCwozVJO)
+
+
+![Screenshot 2](https://drive.google.com/uc?export=view&id=18Xt3GvQlTnS9zeeW-OwE7t78VCwozVJO)
+
+
 ## Getting Started
 
 ### Prerequisites
@@ -47,19 +54,19 @@ Before running the app, ensure you have the following installed:
    git clone https://github.com/1DevNawaf/LiveChat.git
    ```
 
-2. Navigate to the project directory:
+   2. Navigate to the project directory:
 
-   ```bash
-   cd LiveChat
-   ```
+      ```bash
+       cd LiveChat
+       ```
   
-3. Add your Firebase configuration files to the android/app directory.
+   3. Add your Firebase configuration files to the android/app directory.
 
-4. Install dependencies:
-   ```bash
-   flutter pub get
-   ```
-5. Run the app:
-   ```bash
-   flutter run
-   ```
+   4. Install dependencies:
+        ```bash
+       flutter pub get
+       ```
+   5. Run the app:
+      ```bash
+       flutter run
+       ```
