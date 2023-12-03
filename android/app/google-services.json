@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "729168036948",
-    "project_id": "live-chat-c184d",
-    "storage_bucket": "live-chat-c184d.appspot.com"
+    "project_number": "YOUR_PROJECT_NUMBER",
+    "project_id": "YOUR_PROJECT_ID",
+    "storage_bucket": "YOUR_PROJECT_BUCKET"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:729168036948:android:48938c11a858a4378c59c1",
+        "mobilesdk_app_id": "YOUR_APP_ID",
         "android_client_info": {
           "package_name": "com.nawaf_mohammed.live_chat"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD5IR_JDgsevp-aWwM3Pwvxbjdg3HDu218"
+          "current_key": "YOUR_KEY"
         }
       ],
       "services": {
