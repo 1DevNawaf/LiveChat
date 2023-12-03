@@ -47,19 +47,19 @@ Before running the app, ensure you have the following installed:
    git clone https://github.com/1DevNawaf/LiveChat.git
    ```
 
-   2. Navigate to the project directory:
+2. Navigate to the project directory:
 
-      ```bash
-       cd LiveChat
-       ```
+   ```bash
+   cd LiveChat
+   ```
   
-   3. Add your Firebase configuration files to the android/app directory.
+3. Add your Firebase configuration files to the android/app directory.
 
-   4. Install dependencies:
-        ```bash
-       flutter pub get
-       ```
-   5. Run the app:
-      ```bash
-       flutter run
-       ```
+4. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+5. Run the app:
+   ```bash
+   flutter run
+   ```
