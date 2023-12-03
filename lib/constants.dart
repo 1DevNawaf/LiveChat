@@ -26,3 +26,8 @@ const kBackgroundColor = Color(0xffFFF8DE);
 const kColor1 = Color(0xff243B3B);
 
 const kColor2 = Color(0xffE1C97D);
+
+const kSenderTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  color: kColor1,
+);

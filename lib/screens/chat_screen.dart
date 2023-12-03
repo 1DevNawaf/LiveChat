@@ -35,6 +35,27 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  void getMessages() async {
+    final messagesSrc = await _fire.collection("messages").get();
+
+    for (var message in messagesSrc.docs) {
+      print(message.data());
+    }
+  }
+
+  void messagesStream() async {
+    try {
+      await for (var snapshot in _fire.collection("messages").snapshots()) {
+        for (var message in snapshot.docs) {
+          print(message.data());
+        }
+      }
+    } catch (e) {
+      print("there was an error\n=======================================\n");
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,10 +65,12 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: <Widget>[
           IconButton(
               color: kColor2,
-              icon: Icon(Icons.close),
+              icon: Icon(Icons.logout),
               onPressed: () {
-                _auth.signOut();
-                Navigator.pop(context);
+                // _auth.signOut();
+                // Navigator.pop(context);
+
+                messagesStream();
               }),
         ],
         title: Text(
@@ -64,6 +87,40 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            StreamBuilder<QuerySnapshot>(
+              stream: _fire.collection("messages").snapshots(),
+              builder: (context, snapshot) {
+                List<Column> messageWidgets = [];
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: kColor2,
+                    ),
+                  );
+                }
+                final messages = snapshot.data!.docs;
+                // List<Text> messageWidgets = [];
+                for (var message in messages) {
+                  final messageText = message["text"];
+                  final messageSender = message["sender"];
+
+                  final messageWidget = Column(
+                    children: [
+                      Text("$messageSender:", style: kSenderTextStyle),
+                      Text("$messageText\n"),
+                    ],
+                  );
+
+                  messageWidgets.add(messageWidget);
+                }
+                // return Column(
+                //   children: messageWidgets,
+                // );
+                return Column(
+                  children: messageWidgets,
+                );
+              },
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -78,15 +135,15 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      _fire.collection("messages").add({
-                        "sender": loggedInUser.email,
-                        "text": messageText,
-                      });
-                    },
-                    child: Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
+                    child: IconButton(
+                      color: kColor1,
+                      icon: Icon(Icons.send),
+                      onPressed: () {
+                        _fire.collection("messages").add({
+                          "sender": loggedInUser.email,
+                          "text": messageText,
+                        });
+                      },
                     ),
                   ),
                 ],
