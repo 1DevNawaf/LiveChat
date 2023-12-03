@@ -71,3 +71,22 @@ Before running the app, ensure you have the following installed:
       ```bash
        flutter run
        ```
+
+
+The app should now be accessible on your device or emulator.
+
+## License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+## Acknowledgments
+Special thanks to the contributors who have made this project possible.
+
+
+## Contact
+For any inquiries or support:
+
+Nawaf Mohammed Alghodyah
+
+1nawaf.dev@gmail.com
+
+https://www.linkedin.com/in/nawaf-al-ghodyah-781a4b247/
