@@ -14,8 +14,13 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  //this controller is for the message to clear the text when you send the message
   final messageTextController = TextEditingController();
+
+  //firebase authenticator
   final _auth = FirebaseAuth.instance;
+
+  //an instance of the user logged in with FirebaseAuth
   late User loggedInUser;
 
   late String messageText;
@@ -90,39 +95,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            StreamBuilder<QuerySnapshot>(
-              stream: _fire.collection("messages").snapshots(),
-              builder: (context, snapshot) {
-                List<MessageBubble> messageBubbles = [];
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: kColor2,
-                    ),
-                  );
-                }
-                final messages = snapshot.data!.docs;
-                // List<Text> messageWidgets = [];
-                for (var message in messages) {
-                  final messageText = message["text"];
-                  final messageSender = message["sender"];
-
-                  final messageWidget = MessageBubble(
-                      sender: messageSender, text: messageText, isMe: false);
-
-                  messageBubbles.add(messageWidget);
-                }
-                // return Column(
-                //   children: messageWidgets,
-                // );
-                return Expanded(
-                  child: ListView(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                    children: messageBubbles,
-                  ),
-                );
-              },
-            ),
+            MessageStreamBuilder(),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -156,6 +129,48 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+//this is the class to handle the stream from firebase
+class MessageStreamBuilder extends StatelessWidget {
+  const MessageStreamBuilder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: _fire.collection("messages").snapshots(),
+      builder: (context, snapshot) {
+        List<MessageBubble> messageBubbles = [];
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: kColor2,
+            ),
+          );
+        }
+        final messages = snapshot.data!.docs;
+        // List<Text> messageWidgets = [];
+        for (var message in messages) {
+          final messageText = message["text"];
+          final messageSender = message["sender"];
+
+          final messageWidget = MessageBubble(
+              sender: messageSender, text: messageText, isMe: false);
+
+          messageBubbles.add(messageWidget);
+        }
+        // return Column(
+        //   children: messageWidgets,
+        // );
+        return Expanded(
+          child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            children: messageBubbles,
+          ),
+        );
+      },
     );
   }
 }
